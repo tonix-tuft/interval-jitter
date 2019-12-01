@@ -1,13 +1,14 @@
 {
   "name": "interval-jitter",
   "version": "1.0.0",
-  "description": "An interval jitter which executes a callback at random time intervals between a minimum and a maximum time.",
+  "description": "An interval jitter which executes a callback at random time intervals between a minimum and a maximum delay.",
   "keywords": [
     "interval",
     "jitter",
     "callback",
     "time",
-    "random"
+    "random",
+    "delay"
   ],
   "author": "Anton Bagdatyev (Tonix-Tuft)",
   "license": "MIT",
