@@ -1,0 +1,39 @@
+{
+  "name": "interval-jitter",
+  "version": "1.0.0",
+  "description": "An interval jitter which executes a callback at random time intervals between a minimum and a maximum time.",
+  "keywords": [
+    "interval",
+    "jitter",
+    "callback",
+    "time",
+    "random"
+  ],
+  "author": "Anton Bagdatyev (Tonix-Tuft)",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tonix-tuft/interval-jitter.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "WEBPACK_ENV=watch webpack --progress --colors --watch",
+    "build": "WEBPACK_ENV=build webpack"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.9.0",
+    "@typescript-eslint/parser": "^2.9.0",
+    "eslint": "^6.7.2",
+    "terser-webpack-plugin": "^1.4.1",
+    "typescript": "^3.7.2",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "bugs": {
+    "url": "https://github.com/tonix-tuft/interval-jitter/issues"
+  },
+  "homepage": "https://github.com/tonix-tuft/interval-jitter#readme"
+}
