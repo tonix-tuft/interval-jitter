@@ -10,7 +10,7 @@
     "random",
     "delay"
   ],
-  "author": "Anton Bagdatyev (Tonix-Tuft)",
+  "author": "Anton Bagdatyev (Tonix)",
   "license": "MIT",
   "main": "./dist/interval-jitter.js",
   "module": "./src/index.js",
