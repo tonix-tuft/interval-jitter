@@ -45,27 +45,43 @@ const INTERVAL_JITTER_MAX_INTERVAL = 2147483647;
  * @param {Function} callback Callback to execute at random intervals.
  *                            The callback will be bound to the instance of this IntervalJitter.
  * @param {Object} [obj] An object with further parameters.
- * @param {number} [obj.minInterval] Minimum delay in milliseconds between the executions of the given callback.
+ * @param {undefined|number} [obj.minInterval] Minimum delay in milliseconds between the executions of the given callback.
  *                                   Defaults to 0.
- * @param {number} [obj.maxInterval] Maximum delay in milliseconds between the executions of the given callback.
+ * @param {undefined|number} [obj.maxInterval] Maximum delay in milliseconds between the executions of the given callback.
  *                                   Defaults to 1000 milliseconds (1 second).
+ * @param {undefined|number} [obj.interval] Delay in milliseconds between the executions of the given callback
+ *                                (if set, "minInterval" and "maxInterval" will not be considered).
  */
 function IntervalJitter(
   callback,
-  { minInterval = 0, maxInterval = INTERVAL_JITTER_DEFAULT_MAX_INTERVAL } = {}
+  { minInterval = void 0, maxInterval = void 0, interval = void 0 } = {}
 ) {
+  if (typeof interval !== "undefined") {
+    minInterval = interval;
+    maxInterval = interval;
+  } else {
+    typeof minInterval === "undefined" && (minInterval = 0);
+    typeof maxInterval === "undefined" &&
+      (maxInterval = INTERVAL_JITTER_MAX_INTERVAL);
+  }
+
   /**
    * @property {Function}
    */
   this.callback = callback;
 
   /**
-   * @property {Boolean}
+   * @property {boolean}
    */
   this.stopped = true;
 
   /**
-   * @property {Number}
+   * @property {number}
+   */
+  this.interval = interval;
+
+  /**
+   * @property {number}
    */
   this.minInterval;
   this.setMinInterval(minInterval);
@@ -93,7 +109,7 @@ function IntervalJitter(
  * @param {number} minInterval Minimum delay in milliseconds.
  * @return {undefined}
  */
-IntervalJitter.prototype.setMinInterval = function(minInterval) {
+IntervalJitter.prototype.setMinInterval = function (minInterval) {
   if (
     (minInterval !== 0 && !minInterval) ||
     minInterval < 0 ||
@@ -112,7 +128,7 @@ IntervalJitter.prototype.setMinInterval = function(minInterval) {
  * @param {number} maxInterval Maximum delay in milliseconds.
  * @return {undefined}
  */
-IntervalJitter.prototype.setMaxInterval = function(maxInterval) {
+IntervalJitter.prototype.setMaxInterval = function (maxInterval) {
   if (
     (maxInterval !== 0 && !maxInterval) ||
     maxInterval < 0 ||
@@ -132,7 +148,7 @@ IntervalJitter.prototype.setMaxInterval = function(maxInterval) {
  * @param {Function} callback The callback to execute.
  * @return {undefined}
  */
-IntervalJitter.prototype.setCallback = function(callback) {
+IntervalJitter.prototype.setCallback = function (callback) {
   if (typeof callback === "function") {
     this.callback = callback;
   }
@@ -146,7 +162,7 @@ IntervalJitter.prototype.setCallback = function(callback) {
  *
  * @return {undefined}
  */
-IntervalJitter.prototype.run = function() {
+IntervalJitter.prototype.run = function () {
   this.stopped = false;
   const loop = () => {
     // Stop if this jitter was stopped.
@@ -177,7 +193,7 @@ IntervalJitter.prototype.run = function() {
  * @return {undefined}
  */
 // eslint-disable-next-line no-unused-vars
-IntervalJitter.prototype.onCallbackExecuted = function(res) {
+IntervalJitter.prototype.onCallbackExecuted = function (res) {
   return;
 };
 
@@ -188,7 +204,7 @@ IntervalJitter.prototype.onCallbackExecuted = function(res) {
  *
  * @return {undefined}
  */
-IntervalJitter.prototype.stop = function() {
+IntervalJitter.prototype.stop = function () {
   if (this.outerTimeoutTimer) {
     clearTimeout(this.outerTimeoutTimer);
   }
