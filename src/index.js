@@ -46,11 +46,11 @@ const INTERVAL_JITTER_MAX_INTERVAL = 2147483647;
  *                            The callback will be bound to the instance of this IntervalJitter.
  * @param {Object} [obj] An object with further parameters.
  * @param {undefined|number} [obj.minInterval] Minimum delay in milliseconds between the executions of the given callback.
- *                                   Defaults to 0.
+ *                                             Defaults to 0.
  * @param {undefined|number} [obj.maxInterval] Maximum delay in milliseconds between the executions of the given callback.
- *                                   Defaults to 1000 milliseconds (1 second).
+ *                                             Defaults to 1000 milliseconds (1 second).
  * @param {undefined|number} [obj.interval] Delay in milliseconds between the executions of the given callback
- *                                (if set, "minInterval" and "maxInterval" will not be considered).
+ *                                          (if set, "minInterval" and "maxInterval" will not be considered).
  */
 function IntervalJitter(
   callback,
@@ -62,7 +62,7 @@ function IntervalJitter(
   } else {
     typeof minInterval === "undefined" && (minInterval = 0);
     typeof maxInterval === "undefined" &&
-      (maxInterval = INTERVAL_JITTER_MAX_INTERVAL);
+      (maxInterval = INTERVAL_JITTER_DEFAULT_MAX_INTERVAL);
   }
 
   /**
