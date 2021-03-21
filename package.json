@@ -1,6 +1,6 @@
 {
   "name": "interval-jitter",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "An interval jitter which executes a callback at random time intervals between a minimum and a maximum delay.",
   "keywords": [
     "interval",
